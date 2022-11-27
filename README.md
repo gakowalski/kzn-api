@@ -1,48 +1,48 @@
 # Kudy z nudy API
 
-Níže je popsáno aplikační rozhraní (API) pro přístup k publikovanému obsahu a dalším službám na portálu [Kudy z nudy](https://www.kudyznudy.cz/). API slouží pro integraci externích subjektů a aplikací a umožňuje jim získávat primárně obsah publikovaný na portále. Stejný formát dat se také používá u obrácené integrace - tedy [importu dat od externích subjektů do Kudy z nudy](/Import.md).
+The following describes the application programming interface (API) for accessing published content and other services on the [Kudy z nudy](https://www.kudyznudy.cz/) portal. The API is used to integrate external entities and applications and allows them to retrieve primary content published on the portal. The same data format is also used for reverse integration - i.e. [importing data from external entities into Kudy z nudy](/Import.md).
 
-Provozovatelem portálu [Kudy z nudy](https://www.kudyznudy.cz) a poskytovatelem API je agentura [CzechTourism](https://www.czechtourism.cz/).
+The operator of the portal [Kudy z nudy](https://www.kudyznudy.cz) and the API provider is the [CzechTourism](https://www.czechtourism.cz/) agency.
 
-## Přístup k API
+## API access
 
-API je přístupné pouze pro smluvní partnery CzechTourism. **Pro přístup k API je nutné mít účet na portálu Kudy z nudy a k tomuto účtu mít přidělena přístupová práva.** Přístupová práva obdrží partner od poskytovatele API. Více informací pro získání přístupu naleznete na [Kudy z nudy - API](https://www.kudyznudy.cz/faq-casto-kladene-otazky/api).
+The API is only available to CzechTourism contractual partners. **To access the API, it is necessary to have an account on the Kudy z nudy portal and to have access rights to this account.** Access rights will be granted to the partner by the API provider. For more information on gaining access, please visit [Kudy z nudy - API](https://www.kudyznudy.cz/faq-casto-kladene-otazky/api).
 
-## Základní informace k API
+## Basic information about API
 
-API běží na adrese [https://api.kudyznudy.cz](https://api.kudyznudy.cz/).
+API runs at [https://api.kudyznudy.cz](https://api.kudyznudy.cz/).
 
-Automaticky generovaná dokumentace API ve formátu Swagger je na adrese [https://api.kudyznudy.cz/swagger/ui/index](https://api.kudyznudy.cz/swagger/ui/index).
+The automatically generated API documentation in Swagger format is at [https://api.kudyznudy.cz/swagger/ui/index](https://api.kudyznudy.cz/swagger/ui/index).
 
-V dokumentaci jsou uvedeny příklady volání API pomocí cURL.
+The documentation provides examples of API calls using cURL.
 
-## Formát dat
+## Data format
 
 Jednotlivé služby popsané níže vrací data ve formátu [JSON](https://www.json.org/). Modely dat pro publikovaný obsah byly navrženy podle vzoru Otevřených dat [https://opendata.gov.cz](https://opendata.gov.cz/), respektive podle Otevřených formálních norem [https://data.gov.cz/ofn/](https://data.gov.cz/ofn/).
 
 
-## Autentizace k API
+## Authentication to API
 
-Pro volání služeb API je nutné se přihlásit pod uživatelským účtem, který má patřičná přístupová práva [https://api.kudyznudy.cz/login](https://api.kudyznudy.cz/login). Po úspěšném přihlášení je uživateli vrácen Bearer token, kterým je potřeba podepisovat veškerá volání v rámci API.
+To call API services, you must log in with a user account that has the appropriate access rights [https://api.kudyznudy.cz/login](https://api.kudyznudy.cz/login). After a successful login, the user is returned a Bearer token, which is needed to sign all calls within the API.
 
-Uživatel může mít plný nebo omezený přístup (v závislosti na stupni partnerství). Viz  [Kudy z nudy - API](https://www.kudyznudy.cz/faq-casto-kladene-otazky/api). V případě plného přístupu je vrácen vždy kompletní datový objekt. V případně omezeného přístupu je vrácena pouze jeho veřejná část.
+A user may have full or limited access (depending on the level of partnership). See  [Kudy z nudy - API](https://www.kudyznudy.cz/faq-casto-kladene-otazky/api). In the case of full access, the complete data object is always returned. In the case of limited access, only the public part is returned.
 
-## Aktivita (Turistický cíl)
+## Activity (Tourist destination)
 
 Aktivita (turistický cíl) je typ obsahu publikovaného na portálu Kudy z nudy. Vyznačuje se časově neomezenou dobou trvání.
 
 Aktivity naleznete v sekci portálu [Co chcete dělat](https://www.kudyznudy.cz/co-chcete-delat).
 
-### Seznam aktivit (turistických cílů)
+### List of activities (tourist destinations)
 
-Metoda vrací seznam publikovaných aktivit.
+The method returns a list of published activities.
 
-Seznam všech aktivit získáte pomocí volání:
+For a list of all activities, call:
 
     curl --location --request GET 'https://api.kudyznudy.cz/content/activities' \
     --header 'Authorization: Bearer <ACCESS_TOKEN>'
 
-Pro získání aktivit změněných po určitém čase je volání služby následující:
+To get activities changed after a certain time, the service call is as follows:
 
     curl --location --request POST 'https://api.kudyznudy.cz/content/activities' \
     --header 'Content-Type: application/json' \
@@ -52,9 +52,9 @@ Pro získání aktivit změněných po určitém čase je volání služby násl
         "date": "2022-10-10T00:00:00.000Z"
     }'
 
-*Metoda se hodí například pro efektivnější synchronizaci dat.*
+*The method is useful, for example, for more efficient data synchronization.*
 
-Odpověď je pole JSON objektů. Například:
+The answer is an array of JSON objects. For example::
 
     [
         {
@@ -77,19 +77,19 @@ Odpověď je pole JSON objektů. Například:
     ]
 
 
-| **Hodnota** | **Popis hodnoty** |
+| **Value** | **Description** |
 | --- | --- |
-| @context | Popis formátu dat – šablona jsonld (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
-| typ | Turistický cíl |
-| id | Unikátní GUID záznamu |
-| iri | Unikání adresa záznamu (URL detailu článku na Kudy z nudy) |
-| název | Název článku (titulek) |
-| vyvořeno | Datum a čas vytvoření |
-| aktualizováno | Datum a čas poslední změny |
+| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| typ | Turistický cíl (Tourist destination) |
+| id | Unique GUID of the record |
+| iri | Unique record address (URL of the article on Kudy z nudy) |
+| název | Article title (headline) |
+| vyvořeno | Date and time of creation |
+| aktualizováno | Date and time of last change |
 
-### Detail aktivity (turistického cíle)
+### Activity detail (tourist destination)
 
-Metoda slouží pro získání detailu publikované aktivity:
+Activity detail (tourist destination):
 
     curl --location --request POST 'https://api.kudyznudy.cz/content/activities' \
     --header 'Content-Type: application/json' \
@@ -99,9 +99,9 @@ Metoda slouží pro získání detailu publikované aktivity:
         "id": "630586e5-9541-4099-84ef-f8a35dc8b745"
     }'
 
-Výstupem je JSON objekt. Podle typu přístupu je uživateli vrácen plnohodnotný objekt nebo jenom jeho veřejná část.
+The output is a JSON object. Depending on the access type, the full object or just the public part of the object is returned to the user.
 
-Plnohodnotný objekt (v případně plného přístupu):
+Full-featured object (in full-access mode):
 
     {
     "@context": "https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil.jsonld",
@@ -278,32 +278,32 @@ Plnohodnotný objekt (v případně plného přístupu):
     ]
 }
 
-| **Hodnota** | **Popis hodnoty** |
+| **Value** | **Description** |
 | --- | --- |
-| @context | Popis formátu dat – šablona jsonld (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil.jsonld](https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil.jsonld)) |
-| typ | Turistický cíl |
-| typ_turistického_cíle | Pole typů turistického cíle (první je hlavní) |
-| kategorie_turistického_cíle | Pole kategorií typů turistických cílů |
-| id | Unikátní GUID záznamu |
-| iri | Unikání adresa záznamu (URL detailu článku na Kudy z nudy) |
-| název | Název článku (titulek) |
-| vyvořeno | Datum a čas vytvoření |
-| aktualizováno | Datum a čas poslední změny |
-| popis | Krátká anotace (perex) – prostý text |
-| dlouhý_popis | HTML text pokračující za krátkým popisem |
-| vhodné_pro_děti | Vhodné pro děti (true / false) |
-| vhodné_pro_zvířata | Vhodné pro zvířata (true / false) |
-| za_každého_počasí | Za každého počasí (true / false) |
-| bezbariériový_přístup | Bezbariérový přístup (true / false) |
-| časová_náročnost | Počet hodin potřebných k návštěvě místa |
-| registrace | URL adresa registrace na externím webu |
-| pořadatel | Adresa, a kontakt na pořadatele |
-| umístění | Místa konání (adresy a kontakty) |
-| kategorie_vstupného | Ceny jednotlivých typů vstupného |
-| otevírací_doba | Definice otevírací doby v jednotlivých dnech |
-| příloha | Pole obrázků a jejich metadat |
+| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| typ | Turistický cíl (Tourist destination) |
+| id | Unique GUID of the record |
+| iri | Unique record address (URL of the article on Kudy z nudy) |
+| název | Article title (headline) |
+| vyvořeno | Date and time of creation |
+| aktualizováno | Date and time of last change |
+| typ_turistického_cíle | Array of tourist destination types (the first one is the main one) |
+| kategorie_turistického_cíle | Category field of tourist destination types |
+| popis | Short annotation (introduction) - plain text |
+| dlouhý_popis | HTML text following the short description |
+| vhodné_pro_děti | Suitable for children (true / false) |
+| vhodné_pro_zvířata | Suitable for animals (true / false) |
+| za_každého_počasí | In any weather (true / false) |
+| bezbariériový_přístup | Barrier-free access (true / false) |
+| časová_náročnost | Number of hours needed to visit the site |
+| registrace | URL address of the registration on the external website |
+| pořadatel |  Address and contact to the organizer |
+| umístění | Venues (addresses and contacts)) |
+| kategorie_vstupného | Prices of individual types of admission |
+| otevírací_doba | Definition of opening hours on individual days |
+| příloha | Array of images and their metadata |
 
-Veřejná část objektu (v případě omezeného Public přístupu):
+Public part of the building (in case of limited public access):
 
     {
     "@context": "https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil-public.jsonld",
@@ -357,36 +357,49 @@ Veřejná část objektu (v případě omezeného Public přístupu):
         ]
     }
 
-| **Hodnota** | **Popis hodnoty** |
+| **Value** | **Description** |
 | --- | --- |
-| @context | Popis formátu dat – šablona jsonld (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil-public.jsonld](https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil-public.jsonld)) |
-| typ | Turistický cíl |
-| id | Unikátní GUID záznamu |
-| iri | Unikání adresa záznamu (URL detailu článku na Kudy z nudy) |
-| název | Název článku (titulek) |
-| vyvořeno | Datum a čas vytvoření |
-| aktualizováno | Datum a čas poslední změny |
-| popis | Krátká anotace (perex) – prostý text |
-| geometrie | Souřadnice GPS |
-| příloha | Pole obrázků a jejich metadat |
+| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| typ | Turistický cíl (Tourist destination) |
+| id | Unique GUID of the record |
+| iri | Unique record address (URL of the article on Kudy z nudy) |
+| název | Article title (headline) |
+| vyvořeno | Date and time of creation |
+| aktualizováno | Date and time of last change |
+| typ_turistického_cíle | Array of tourist destination types (the first one is the main one) |
+| kategorie_turistického_cíle | Category field of tourist destination types |
+| popis | Short annotation (introduction) - plain text |
+| dlouhý_popis | HTML text following the short description |
+| vhodné_pro_děti | Suitable for children (true / false) |
+| vhodné_pro_zvířata | Suitable for animals (true / false) |
+| za_každého_počasí | In any weather (true / false) |
+| bezbariériový_přístup | Barrier-free access (true / false) |
+| časová_náročnost | Number of hours needed to visit the site |
+| registrace | URL address of the registration on the external website |
+| pořadatel |  Address and contact to the organizer |
+| umístění | Venues (addresses and contacts)) |
+| kategorie_vstupného | Prices of individual types of admission |
+| otevírací_doba | Definition of opening hours on individual days |
+| příloha | Array of images and their metadata |
+| geometrie | GPS coordinates |
 
-## Akce (Událost)
+## Action (Event)
 
-Akce (událost) je dalším typem obsahu publikovaného na portálu Kudy z nudy. Vyznačuje se časově omezenou dobou trvání.
+Action (event) is another type of content published on the portal Kudy z nudy. It is characterized by a limited duration.
 
-Akce naleznete v sekci portálu [Kalendář akcí](https://www.kudyznudy.cz/kalendar-akci).
+Events can be found in the [Calendar of Events](https://www.kudyznudy.cz/kalendar-akci). section of the portal.
 
-### Seznam akcí (událostí)
+### List of actions (events)
 
-Metoda vrací seznam publikovaných akcí.
+The method returns a list of published actions.
 
-Seznam akcí získáte voláním:
+For a list of events, call:
 
     curl --location --request GET 'https://api.kudyznudy.cz/content/events' \
     --header 'Accept: application/json' \
     --header 'Authorization: Bearer <ACCESS_TOKEN>'
 
-Získání akcí změněných po určitém čase pak pomocí volání:
+Retrieving actions changed after a certain time by calling:
 
     curl --location --request POST 'https://api.kudyznudy.cz/content/events' \
     --header 'Content-Type: application/json' \
@@ -396,7 +409,7 @@ Získání akcí změněných po určitém čase pak pomocí volání:
         "date": "2022-10-10T09:23:40.085Z"
     }'
 
-Výstup služeb seznamu akcí – pole JSON objektů:
+Action list services output - JSON object array:
 
     [
         {
@@ -435,19 +448,19 @@ Výstup služeb seznamu akcí – pole JSON objektů:
         }
     ]
 
-| **Hodnota** | **Popis hodnoty** |
+| **Value** | **Description** |
 | --- | --- |
-| @context | Popis formátu dat – šablona jsonld (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
-| typ | Událost |
-| id | Unikátní GUID záznamu |
-| iri | Unikání adresa záznamu (URL detailu článku na Kudy z nudy) |
-| název | Název článku (titulek) |
-| vyvořeno | Datum a čas vytvoření |
-| aktualizováno | Datum a čas poslední změny |
+| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| typ | Action (Event) |
+| id | Unique GUID of the record |
+| iri | Unique record address (URL of the article on Kudy z nudy) |
+| název | Article title (headline) |
+| vyvořeno | Date and time of creation |
+| aktualizováno | Date and time of last change |
 
-### Detail akce (události)
+### Action (event) detail
 
-Služba pro získání detailu publikované akce:
+Service for getting details of a published event:
 
     curl --location --request POST 'https://api.kudyznudy.cz/content/events' \
     --header 'Content-Type: application/json' \
@@ -457,9 +470,9 @@ Služba pro získání detailu publikované akce:
         "id": "d3ba097e-9ad7-4de2-af3c-18e395dfbbcc"
     }'
 
-Výstupem služby detailu akce je JSON objekt. Podle typu přístupu je uživateli vrácen plnohodnotný objekt nebo jenom jeho veřejná část.
+The output of the action detail service is a JSON object. Depending on the access type, the full object or just the public part of the object is returned to the user.
 
-Plnohodnotný objekt (v případně plného přístupu):
+Full-featured object (in full access):
 
     {
         "@context": "https://www.kudyznudy.cz/kzn/context/v1/udalost.jsonld",
@@ -632,32 +645,35 @@ Plnohodnotný objekt (v případně plného přístupu):
         ]
     }
 
-| **Hodnota** | **Popis hodnoty** |
+| **Value** | **Description** |
 | --- | --- |
-| @context | Popis formátu dat – šablona jsonld (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/udalost.jsonld](https://www.kudyznudy.cz/kzn/context/v1/udalost.jsonld)) |
-| typ | Událost |
-| doba_trvání | Začátek a konec akce |
-| typ_události | Pole typů události (první je hlavní) |
-| id | Unikátní GUID záznamu |
-| iri | Unikání adresa záznamu (URL detailu článku na Kudy z nudy) |
-| název | Název článku (titulek) |
-| vyvořeno | Datum a čas vytvoření |
-| aktualizováno | Datum a čas poslední změny |
-| popis | Krátká anotace (perex) – prostý text |
-| dlouhý_popis | HTML text pokračující za krátkým popisem |
-| vhodné_pro_děti | Vhodné pro děti (true / false) |
-| vhodné_pro_zvířata | Vhodné pro zvířata (true / false) |
-| za_každého_počasí | Za každého počasí (true / false) |
-| bezbariériový_přístup | Bezbariérový přístup (true / false) |
-| časová_náročnost | Počet hodin potřebných k návštěvě místa |
-| registrace | URL adresa registrace na externím webu |
-| pořadatel | Adresa, a kontakt na pořadatele |
-| umístění | Místa konání (adresy a kontakty) |
-| kategorie_vstupného | Ceny jednotlivých typů vstupného |
-| otevírací_doba | Definice otevírací doby v jednotlivých dnech |
-| příloha | Pole obrázků a jejich metadat |
+| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| typ | Událost (Event) |
+| id | Unique GUID of the record |
+| iri | Unique record address (URL of the article on Kudy z nudy) |
+| název | Article title (headline) |
+| vyvořeno | Date and time of creation |
+| aktualizováno | Date and time of last change |
+| typ_turistického_cíle | Array of tourist destination types (the first one is the main one) |
+| kategorie_turistického_cíle | Category field of tourist destination types |
+| popis | Short annotation (introduction) - plain text |
+| dlouhý_popis | HTML text following the short description |
+| vhodné_pro_děti | Suitable for children (true / false) |
+| vhodné_pro_zvířata | Suitable for animals (true / false) |
+| za_každého_počasí | In any weather (true / false) |
+| bezbariériový_přístup | Barrier-free access (true / false) |
+| časová_náročnost | Number of hours needed to visit the site |
+| registrace | URL address of the registration on the external website |
+| pořadatel |  Address and contact to the organizer |
+| umístění | Venues (addresses and contacts)) |
+| kategorie_vstupného | Prices of individual types of admission |
+| otevírací_doba | Definition of opening hours on individual days |
+| příloha | Array of images and their metadata |
+| geometrie | GPS coordinates |
+| doba_trvání | Start and end of the event |
+| typ_události | Array of event types (the first one is the main one) |
 
-Veřejná část objektu (v případě omezeného Public přístupu):
+Public part of the building (in case of limited public access):
 
     {
         "@context": "https://www.kudyznudy.cz/kzn/context/v1/udalost-public.jsonld",
@@ -725,16 +741,16 @@ Veřejná část objektu (v případě omezeného Public přístupu):
         ]
     }
 
-| **Hodnota** | **Popis hodnoty** |
+| **Value** | **Description** |
 | --- | --- |
-| @context | Popis formátu dat – šablona jsonld (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/udalost-public.jsonld](https://www.kudyznudy.cz/kzn/context/v1/udalost-public.jsonld)) |
-| typ | Událost |
-| doba_trvání | Začátek a konec akce |
-| id | Unikátní GUID záznamu |
-| iri | Unikání adresa záznamu (URL detailu článku na Kudy z nudy) |
-| název | Název článku (titulek) |
-| vyvořeno | Datum a čas vytvoření |
-| aktualizováno | Datum a čas poslední změny |
-| popis | Krátká anotace (perex) – prostý text |
-| geometrie | Souřadnice GPS |
-| příloha | Pole obrázků a jejich metadat |
+| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| typ | Událost (Event) |
+| id | Unique GUID of the record |
+| iri | Unique record address (URL of the article on Kudy z nudy) |
+| název | Article title (headline) |
+| vyvořeno | Date and time of creation |
+| aktualizováno | Date and time of last change |
+| popis | Short annotation (introduction) - plain text |
+| příloha | Array of images and their metadata |
+| geometrie | GPS coordinates |
+| doba_trvání | Start and end of the event |
