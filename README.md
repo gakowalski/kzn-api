@@ -280,7 +280,7 @@ Full-featured object (in full-access mode):
 
 | **Value** | **Description** |
 | --- | --- |
-| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| @context | Data format description - jsonld template (JSON schema: https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil.jsonld) |
 | typ | Turistický cíl (Tourist destination) |
 | id | Unique GUID of the record |
 | iri | Unique record address (URL of the article on Kudy z nudy) |
@@ -359,7 +359,7 @@ Public part of the building (in case of limited public access):
 
 | **Value** | **Description** |
 | --- | --- |
-| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| @context | Data format description - jsonld template (JSON schema: https://www.kudyznudy.cz/kzn/context/v1/turisticky-cil-public.jsonld) |
 | typ | Turistický cíl (Tourist destination) |
 | id | Unique GUID of the record |
 | iri | Unique record address (URL of the article on Kudy z nudy) |
@@ -647,7 +647,7 @@ Full-featured object (in full access):
 
 | **Value** | **Description** |
 | --- | --- |
-| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| @context | Data format description - jsonld template (JSON schema: https://www.kudyznudy.cz/kzn/context/v1/udalost.jsonld) |
 | typ | Událost (Event) |
 | id | Unique GUID of the record |
 | iri | Unique record address (URL of the article on Kudy z nudy) |
@@ -743,7 +743,7 @@ Public part of the building (in case of limited public access):
 
 | **Value** | **Description** |
 | --- | --- |
-| @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
+| @context | Data format description - jsonld template (JSON schema: https://www.kudyznudy.cz/kzn/context/v1/udalost-public.jsonld) |
 | typ | Událost (Event) |
 | id | Unique GUID of the record |
 | iri | Unique record address (URL of the article on Kudy z nudy) |
