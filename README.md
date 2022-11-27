@@ -18,7 +18,7 @@ The documentation provides examples of API calls using cURL.
 
 ## Data format
 
-Jednotlivé služby popsané níže vrací data ve formátu [JSON](https://www.json.org/). Modely dat pro publikovaný obsah byly navrženy podle vzoru Otevřených dat [https://opendata.gov.cz](https://opendata.gov.cz/), respektive podle Otevřených formálních norem [https://data.gov.cz/ofn/](https://data.gov.cz/ofn/).
+The individual services described below return data in [JSON](https://www.json.org/) format. The data models for published content were designed following the Open Data model [https://opendata.gov.cz](https://opendata.gov.cz/), or the Open Formal Standards [https://data.gov.cz/ofn/](https://data.gov.cz/ofn/).
 
 
 ## Authentication to API
@@ -29,9 +29,9 @@ A user may have full or limited access (depending on the level of partnership). 
 
 ## Activity (Tourist destination)
 
-Aktivita (turistický cíl) je typ obsahu publikovaného na portálu Kudy z nudy. Vyznačuje se časově neomezenou dobou trvání.
+Activity (tourist destination) is a type of content published on the portal Kudy z boredy. It is characterized by an unlimited duration.
 
-Aktivity naleznete v sekci portálu [Co chcete dělat](https://www.kudyznudy.cz/co-chcete-delat).
+Activities can be found in the [Co chcete dělat](https://www.kudyznudy.cz/co-chcete-delat) (What you want to do) section of the portal. .
 
 ### List of activities (tourist destinations)
 
@@ -451,7 +451,7 @@ Action list services output - JSON object array:
 | **Value** | **Description** |
 | --- | --- |
 | @context | Data format description - jsonld template (JSON schema: [https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld](https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld)) |
-| typ | Action (Event) |
+| typ | Událost (Event) |
 | id | Unique GUID of the record |
 | iri | Unique record address (URL of the article on Kudy z nudy) |
 | název | Article title (headline) |
