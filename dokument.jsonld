@@ -1,0 +1,81 @@
+{
+  "$schema": "https://www.kudyznudy.cz/kzn/context/v1/dokument.jsonld",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "@context": {
+          "type": "string"
+        },
+        "typ": {
+          "type": "string",
+          "enum": [ "Událost", "Turistický cíl" ]
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "iri": {
+          "type": "string",
+          "minLength": 5,
+          "format": "uri"
+        },
+        "název": {
+          "type": "object",
+          "properties": {
+            "cs": {
+              "type": "string",
+              "minLength": 5
+            }
+          },
+          "required": [
+            "cs"
+          ]
+        },
+        "vytvořeno": {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Časový okamžik" ]
+            },
+            "datum_a_čas": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "typ",
+            "datum_a_čas"
+          ]
+        },
+        "aktualizováno": {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Časový okamžik" ]
+            },
+            "datum_a_čas": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "typ",
+            "datum_a_čas"
+          ]
+        }
+      },
+      "required": [
+        "@context",
+        "typ",
+        "iri",
+        "název",
+        "vytvořeno",
+        "aktualizováno"
+      ]
+    }
+  ]
+}
