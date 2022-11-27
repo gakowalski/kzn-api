@@ -1,0 +1,780 @@
+{
+  "$schema": "https://www.kudyznudy.cz/kzn/context/v1/udalost.jsonld",
+  "type": "object",
+  "properties": {
+    "@context": {
+      "type": "string"
+    },
+    "typ": {
+      "type": "string",
+      "enum": [ "Událost" ]
+    },
+    "doba_trvání": {
+      "type": "array",
+      "minItems": 1,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Časová specifikace" ]
+            },
+            "časový_interval": {
+              "type": "object",
+              "properties": {
+                "typ": {
+                  "type": "string",
+                  "enum": [ "Časový interval" ]
+                },
+                "začátek": {
+                  "type": "object",
+                  "properties": {
+                    "typ": {
+                      "type": "string",
+                      "enum": [ "Časový okamžik" ]
+                    },
+                    "datum_a_čas": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "typ",
+                    "datum_a_čas"
+                  ]
+                },
+                "konec": {
+                  "type": "object",
+                  "properties": {
+                    "typ": {
+                      "type": "string",
+                      "enum": [ "Časový okamžik" ]
+                    },
+                    "datum_a_čas": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "typ",
+                    "datum_a_čas"
+                  ]
+                }
+              },
+              "required": [
+                "typ",
+                "začátek",
+                "konec"
+              ]
+            }
+          },
+          "required": [
+            "typ",
+            "časový_interval"
+          ]
+        }
+      ]
+    },
+    "typ_události": {
+      "type": "array",
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "https://www.kudyznudy.cz/kalendar-akci/festivaly",
+            "https://www.kudyznudy.cz/kalendar-akci/hudebni-a-divadelni-akce",
+            "https://www.kudyznudy.cz/kalendar-akci/vystavy",
+            "https://www.kudyznudy.cz/kalendar-akci/spolecenske-akce",
+            "https://www.kudyznudy.cz/kalendar-akci/akce-pro-deti",
+            "https://www.kudyznudy.cz/kalendar-akci/sportovni-akce",
+            "https://www.kudyznudy.cz/kalendar-akci/lidova-remesla-a-trhy",
+            "https://www.kudyznudy.cz/kalendar-akci/gastronomicke-akce",
+            "https://www.kudyznudy.cz/kalendar-akci/historicke-a-vojenske-akce",
+            "https://www.kudyznudy.cz/kalendar-akci/priroda-a-ekologie",
+            "https://www.kudyznudy.cz/kalendar-akci/komentovane-prohlidky",
+            "https://www.kudyznudy.cz/kalendar-akci/kurzy-a-workshopy"
+          ]
+        }
+      ]
+    },
+
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "iri": {
+      "type": "string",
+      "minLength": 5,
+      "format": "uri"
+    },
+    "název": {
+      "type": "object",
+      "properties": {
+        "cs": {
+          "type": "string",
+          "minLength": 5
+        }
+      },
+      "required": [
+        "cs"
+      ]
+    },
+    "vytvořeno": {
+      "type": "object",
+      "properties": {
+        "typ": {
+          "type": "string",
+          "enum": [ "Časový okamžik" ]
+        },
+        "datum_a_čas": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "typ",
+        "datum_a_čas"
+      ]
+    },
+    "aktualizováno": {
+      "type": "object",
+      "properties": {
+        "typ": {
+          "type": "string",
+          "enum": [ "Časový okamžik" ]
+        },
+        "datum_a_čas": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "typ",
+        "datum_a_čas"
+      ]
+    },
+    "popis": {
+      "type": "object",
+      "properties": {
+        "cs": {
+          "type": "string",
+          "minLength": 50
+        }
+      },
+      "required": [
+        "cs"
+      ]
+    },
+    "dlouhý_popis": {
+      "type": [ "object", "null" ],
+      "properties": {
+        "cs": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cs"
+      ]
+    },
+    "vhodné_pro_děti": {
+      "type": "boolean"
+    },
+    "vhodné_pro_zvířata": {
+      "type": "boolean"
+    },
+    "za_každého_počasí": {
+      "type": "boolean"
+    },
+    "bezbariériový_přístup": {
+      "type": "boolean"
+    },
+    "časová_náročnost": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "registrace": {
+      "type": [ "object", "null" ],
+      "properties": {
+        "cs": {
+          "type": "string",
+          "minLength": 5,
+          "format": "uri"
+        }
+      },
+      "required": [
+        "cs"
+      ]
+    },
+    "pořadatel": {
+      "type": "object",
+      "properties": {
+        "typ": {
+          "type": "string",
+          "enum": [ "Osoba" ]
+        },
+        "název": {
+          "type": "object",
+          "properties": {
+            "cs": {
+              "type": "string",
+              "minLength": 5
+            }
+          },
+          "required": [
+            "cs"
+          ]
+        },
+        "geometrie": {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Point" ]
+            },
+            "coordinates": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": [
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "required": [
+            "typ",
+            "coordinates"
+          ]
+        },
+        "adresa": {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Kontaktní adresa" ]
+            },
+            "ulice": {
+              "type": "string",
+              "minLength": 5
+            },
+            "obec": {
+              "type": "string",
+              "minLength": 5
+            },
+            "psč": {
+              "type": "string",
+              "minLength": 5
+            },
+            "kontakt": {
+              "type": [ "object", "null" ],
+              "properties": {
+                "typ": {
+                  "type": "string",
+                  "enum": [ "Kontakt" ]
+                },
+                "email": {
+                  "type": [ "string", "null" ],
+                  "pattern": "^mailto:[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+                },
+                "mobil": {
+                  "type": [ "string", "null" ]
+                },
+                "facebook": {
+                  "type": [ "string", "null" ]
+                },
+                "instagram": {
+                  "type": [ "string", "null" ]
+                },
+                "twitter": {
+                  "type": [ "string", "null" ]
+                },
+                "url": {
+                  "type": [ "string", "null" ],
+                  "format": "uri"
+                }
+              },
+              "required": [
+                "typ"
+              ]
+            }
+          },
+          "required": [
+            "typ",
+            "ulice",
+            "obec",
+            "psč"
+          ]
+        },
+        "kontaktní_osoba": {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Kontaktní osoba" ]
+            },
+            "jméno": {
+              "type": "string",
+              "minLength": 5
+            },
+            "email": {
+              "type": "string",
+              "minLength": 5,
+              "pattern": "^mailto:[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+            },
+            "mobil": {
+              "type": [ "string", "null" ]
+            }
+          },
+          "required": [
+            "typ",
+            "jméno",
+            "email"
+          ]
+        }
+      },
+      "required": [
+        "typ",
+        "název",
+        "geometrie",
+        "adresa",
+        "kontaktní_osoba"
+      ]
+    },
+    "umístění": {
+      "type": [ "array", "null" ],
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Místo konání" ]
+            },
+            "název": {
+              "type": "object",
+              "properties": {
+                "cs": {
+                  "type": "string",
+                  "minLength": 5
+                }
+              },
+              "required": [
+                "cs"
+              ]
+            },
+            "geometrie": {
+              "type": "object",
+              "properties": {
+                "typ": {
+                  "type": "string",
+                  "enum": [ "Point" ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": [
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "typ",
+                "coordinates"
+              ]
+            },
+            "adresa": {
+              "type": "object",
+              "properties": {
+                "typ": {
+                  "type": "string",
+                  "enum": [ "Kontaktní adresa" ]
+                },
+                "ulice": {
+                  "type": "string",
+                  "minLength": 5
+                },
+                "obec": {
+                  "type": "string",
+                  "minLength": 5
+                },
+                "psč": {
+                  "type": "string",
+                  "minLength": 5
+                }
+              },
+              "required": [
+                "typ",
+                "ulice",
+                "obec",
+                "psč"
+              ]
+            },
+            "kontaktní_osoba": {
+              "type": [ "object", "null" ],
+              "properties": {
+                "typ": {
+                  "type": "string",
+                  "enum": [ "Kontaktní osoba" ]
+                },
+                "jméno": {
+                  "type": [ "string", "null" ]
+                },
+                "email": {
+                  "type": [ "string", "null" ],
+                  "pattern": "^mailto:[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+                },
+                "mobil": {
+                  "type": [ "string", "null" ]
+                }
+              },
+              "required": [
+                "typ"
+              ]
+            }
+          },
+          "required": [
+            "typ",
+            "název",
+            "geometrie",
+            "adresa"
+          ]
+        }
+      ]
+    },
+    "kategorie_vstupného": {
+      "type": [ "object", "null" ],
+      "properties": {
+        "typ": {
+          "type": "string",
+          "enum": [ "Vstupné" ]
+        },
+        "cena": {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Částka" ]
+            },
+            "výše": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "měna": {
+              "type": "string",
+              "enum": [ "https://publications.europa.eu/resource/authority/currency/CZK" ]
+            }
+          },
+          "required": [
+            "typ",
+            "výše",
+            "měna"
+          ]
+        },
+        "snížená_cena": {
+          "type": [ "object", "null" ],
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Částka" ]
+            },
+            "výše": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "měna": {
+              "type": "string",
+              "enum": [ "https://publications.europa.eu/resource/authority/currency/CZK" ]
+            }
+          },
+          "required": [
+            "typ",
+            "výše",
+            "měna"
+          ]
+        },
+        "rodinné_vstupné": {
+          "type": [ "object", "null" ],
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Částka" ]
+            },
+            "výše": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "měna": {
+              "type": "string",
+              "enum": [ "https://publications.europa.eu/resource/authority/currency/CZK" ]
+            }
+          },
+          "required": [
+            "typ",
+            "výše",
+            "měna"
+          ]
+        },
+        "poznámka": {
+          "type": [ "object", "null" ],
+          "properties": {
+            "cs": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "cs"
+          ]
+        }
+      },
+      "required": [
+        "typ",
+        "cena"
+      ]
+    },
+    "otevírací_doba": {
+      "type": [ "array", "null" ],
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Časová specifikace" ]
+            },
+            "popis": {
+              "type": [ "object", "null" ],
+              "properties": {
+                "cs": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cs"
+              ]
+            },
+            "časový_interval": {
+              "type": "object",
+              "properties": {
+                "typ": {
+                  "type": "string",
+                  "enum": [ "Časová specifikace" ]
+                },
+                "časový_interval": {
+                  "type": "object",
+                  "properties": {
+                    "typ": {
+                      "type": "string",
+                      "enum": [ "Časový interval" ]
+                    },
+                    "začátek": {
+                      "type": "object",
+                      "properties": {
+                        "typ": {
+                          "type": "string",
+                          "enum": [ "Den v měsíci" ]
+                        },
+                        "den": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 31
+                        },
+                        "měsíc": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 12
+                        }
+                      },
+                      "required": [
+                        "typ",
+                        "den",
+                        "měsíc"
+                      ]
+                    },
+                    "konec": {
+                      "type": "object",
+                      "properties": {
+                        "typ": {
+                          "type": "string",
+                          "enum": [ "Den v měsíci" ]
+                        },
+                        "den": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 31
+                        },
+                        "měsíc": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 12
+                        }
+                      },
+                      "required": [
+                        "typ",
+                        "den",
+                        "měsíc"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "typ",
+                    "začátek",
+                    "konec"
+                  ]
+                }
+              },
+              "required": [
+                "typ",
+                "časový_interval"
+              ]
+            },
+            "dny_v_týdnu": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "typ": {
+                      "type": "string",
+                      "enum": [ "Den v týdnu" ]
+                    },
+                    "den": {
+                      "type": "string",
+                      "enum": [
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/úterý",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/středa",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/čtvrtek",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pátek",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/sobota",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/neděle"
+                      ]
+                    },
+                    "časová_doba": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "typ": {
+                              "type": "string",
+                              "enum": [ "Časová doba" ]
+                            },
+                            "od": {
+                              "type": "string",
+                              "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                            },
+                            "do": {
+                              "type": "string",
+                              "pattern": "^\\d{2}:\\d{2}:\\d{2}$"
+                            }
+                          },
+                          "required": [
+                            "typ",
+                            "od",
+                            "do"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "typ",
+                    "den",
+                    "časová_doba"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "typ",
+            "popis",
+            "časový_interval",
+            "dny_v_týdnu"
+          ]
+        }
+      ]
+    },
+    "příloha": {
+      "type": "array",
+      "minItems": 1,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "typ": {
+              "type": "string",
+              "enum": [ "Digitální objekt" ]
+            },
+            "url": {
+              "type": "string",
+              "minLength": 5,
+              "format": "uri"
+            },
+            "autor_díla": {
+              "type": [ "string", "null" ]
+            },
+            "typ_média": {
+              "type": "string",
+              "enum": [
+                "https://www.iana.org/assignments/media-types/image/jpeg",
+                "https://www.iana.org/assignments/media-types/image/webp"
+              ]
+            },
+            "název": {
+              "type": [ "object", "null" ],
+              "properties": {
+                "cs": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cs"
+              ]
+            },
+            "popis": {
+              "type": [ "object", "null" ],
+              "properties": {
+                "cs": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cs"
+              ]
+            }
+          },
+          "required": [
+            "typ",
+            "url",
+            "typ_média"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "@context",
+    "typ",
+    "doba_trvání",
+    "typ_události",
+    "iri",
+    "název",
+    "vytvořeno",
+    "aktualizováno",
+    "popis",
+    "vhodné_pro_děti",
+    "vhodné_pro_zvířata",
+    "za_každého_počasí",
+    "bezbariériový_přístup",
+    "pořadatel",
+    "příloha"
+  ]
+}
